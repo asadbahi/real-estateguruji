@@ -17,10 +17,6 @@ function ListingMapView({type}) {
 
 
 
-    useEffect(()=>{
-        getLatestListing();
-    },[])
-
     const getLatestListing=async()=>{
         const {data,error}=await supabase
         .from('listing')
@@ -35,12 +31,20 @@ function ListingMapView({type}) {
         if(data)
         {
             setListing(data);
+            console.log(data,"data of listinfss");
         }
         if(error)
         {
             toast('Server Side Error')
         }
     }
+
+
+    
+
+    useEffect(()=>{
+        getLatestListing();
+    },[])
 
     const handleSearchClick=async()=>{
         console.log(searchedAddress);

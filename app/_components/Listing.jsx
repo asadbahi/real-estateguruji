@@ -14,6 +14,7 @@ function Listing({listing,handleSearchClick,searchedAddress,
     setCoordinates
 }) {
   const [address,setAddress]=useState();
+// console.log(listing,"whats is comong");
   return (
     <div>
         <div className='p-3 flex gap-6'>

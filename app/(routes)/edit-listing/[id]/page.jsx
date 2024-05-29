@@ -61,6 +61,7 @@ function EditListing({ params }) {
     }
 
     const onSubmitHandler = async (formValue) => {
+        console.log(formValue,"formvalue from edit");
         setLoading(true);
         if(images?.length==0)
         {
@@ -145,7 +146,7 @@ function EditListing({ params }) {
                 initialValues={{
                     type: '',
                     propertyType: '',
-                    profileImage:user?.imageUrl,
+                    // profileImage:user?.imageUrl,
                     fullName:user?.fullName
                 }}
                 onSubmit={(values) => {
@@ -279,7 +280,7 @@ function EditListing({ params }) {
                                         {loading ? <Loader className='animate-spin' /> : 'Save'}
                                     </Button>
 
-                                    {/* <AlertDialog>
+                                     <AlertDialog>
                                         <AlertDialogTrigger asChild>
                                         <Button type="button" disabled={loading} className="">
                                         {loading ? <Loader className='animate-spin' /> : 'Publish'}
@@ -299,7 +300,7 @@ function EditListing({ params }) {
                                                     </AlertDialogAction>
                                             </AlertDialogFooter>
                                         </AlertDialogContent>
-                                    </AlertDialog> */}
+                                    </AlertDialog> 
 
 
                                 </div>

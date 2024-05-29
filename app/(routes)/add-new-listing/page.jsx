@@ -10,6 +10,8 @@ import { toast } from 'sonner';
 
 function AddNewListing() {
     const [selectedAddress,setSelectedAddress]=useState();
+    const [address, setAddress] = useState()
+
     const [coordinates,setCoordinates]=useState();
     const {user}=useUser();
     const [loader,setLoader]=useState(false);
@@ -20,8 +22,8 @@ function AddNewListing() {
             const { data, error } = await supabase
             .from('listing')
             .insert([
-            { address: selectedAddress.label, 
-                coordinates: coordinates,
+            { address: address, 
+              
                 createdBy:user?.primaryEmailAddress.emailAddress
          },
             ])
@@ -37,11 +39,16 @@ function AddNewListing() {
            if(error)
            {
             setLoader(false)
-            console.log('Error');
+            console.log('Error',error);
             toast("Server side error")
            }
         
     }
+
+    const handleChange = (e) => {
+        setAddress(e.target.value);
+      }
+  
   return (
     <div className='mt-10 md:mx-56 lg:mx-80'>
     <div className='p-10 flex flex-col 
@@ -55,8 +62,26 @@ function AddNewListing() {
                 selectedAddress={(value)=>setSelectedAddress(value)}
                 setCoordinates={(value)=>setCoordinates(value)}
             />
+
+
+
+<div className="w-full">
+  <div className="relative w-full min-w-[200px] h-10">
+
+
+    
+    <input onChange={handleChange}
+    value={address}
+    
+      className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans  outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-1 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 text-xl px-2 py-1.5 rounded-[7px] border-blue-gray-200 border-gray-900"
+      placeholder="Enter Eddress " />
+
+  </div>
+</div>  
+
+
             <Button
-                disabled={!selectedAddress|| !coordinates||loader}
+                disabled={!address}
                 onClick={nextHandler}
             >
                 {loader?<Loader className='animate-spin' />:'Next'}
